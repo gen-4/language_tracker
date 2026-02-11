@@ -1,0 +1,13 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: languages_db
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_DB: languages
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 1234
