@@ -9,6 +9,7 @@ defmodule ApiWeb.Router do
     pipe_through :api
 
     get "/posts", ForumController, :get_posts
+    post "/post", ForumController, :create_post
   end
 
   # Enable LiveDashboard in development
