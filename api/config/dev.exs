@@ -5,7 +5,7 @@ config :api, Api.Repo,
   username: "user",
   password: "1234",
   hostname: "localhost",
-  database: "languages_db",
+  database: "languages",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -61,3 +61,8 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :api, Api.Auth.Guardian,
+  issuer: "api",
+  secret_key: "0iBmCg0@rceDoiHZA0A=0jdip2O6SCH0Jacmql@&mBSZlVBBF1wQ#EpDH^AIxh0b",
+  ttl: {2, :hour}

@@ -15,3 +15,9 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
+
+# Get secret key from env in production
+config :api, Api.Auth.Guardian,
+  issuer: "api",
+  secret_key: "",
+  ttl: {1, :hour}
