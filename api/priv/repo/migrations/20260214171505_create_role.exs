@@ -3,7 +3,7 @@ defmodule Api.Repo.Migrations.CreateRole do
 
   def change do
     create table("role") do
-      add :name, :string
+      add :name, :string, null: false
     end
   end
 end

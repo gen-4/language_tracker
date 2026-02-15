@@ -3,7 +3,7 @@ defmodule Api.Repo.Migrations.CreatePost do
 
   def change do
     create table("post") do
-      add :message, :string
+      add :message, :string, null: false
 
       timestamps()
     end

@@ -3,7 +3,7 @@ defmodule Api.Repo.Migrations.CreateUserRoles do
 
   def change do
     create table("user_roles", primary_key: false) do
-      add :user_id, references(:user, on_delete: :nothing), null: false
+      add :user_id, references(:users, on_delete: :nothing), null: false
       add :role_id, references(:role, on_delete: :nothing), null: false
     end
 

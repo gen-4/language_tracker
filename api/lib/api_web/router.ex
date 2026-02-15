@@ -21,6 +21,9 @@ defmodule ApiWeb.Router do
 
     get "/posts", ForumController, :get_posts
     post "/post", ForumController, :create_post
+    post "/resource", ResourceController, :create_resource
+    get "/resources", ResourceController, :get_resources
+    delete "/resource/:id", ResourceController, :delete_resource
   end
 
   # Enable LiveDashboard in development

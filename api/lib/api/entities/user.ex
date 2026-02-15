@@ -4,11 +4,12 @@ defmodule Api.User do
 
   @derive {Jason.Encoder, only: [:id, :username, :inserted_at, :updated_at]}
 
-  schema "user" do
+  schema "users" do
     field :username, :string
     field :hashed_password, :string
     field :password, :string, virtual: true
     many_to_many :roles, Api.Role, join_through: "user_roles", on_replace: :raise
+    has_many :resources, Api.Resource, on_replace: :raise
 
     timestamps(type: :utc_datetime)
   end
