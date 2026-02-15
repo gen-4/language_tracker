@@ -71,3 +71,6 @@ baseline.json
 
 # pnpm store
 .pnpm-store
+
+# vscode
+.vscode/
