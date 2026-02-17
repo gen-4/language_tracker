@@ -41,6 +41,11 @@ defmodule ApiWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
+  plug Corsica,
+    origins: "*",
+    allow_headers: ["content-type", "authorization"],
+    allow_methods: ["GET", "DELETE", "PUT", "POST", "OPTIONS"]
+
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],

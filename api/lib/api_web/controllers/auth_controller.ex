@@ -10,6 +10,7 @@ defmodule ApiWeb.AuthController do
         {:ok, token, _claims} = Guardian.encode_and_sign(user)
 
         json(conn, %{
+          user: user,
           access_token: token,
           token_type: "Bearer"
         })
