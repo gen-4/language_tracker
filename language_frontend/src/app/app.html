@@ -67,23 +67,8 @@
 </style>
 
 <main class="main">
-  <header>
-    <h1>Language Tracker</h1>
-
-    <nav></nav>
-
-    <div class="user-profile">
-      <p class="user-profile-name">GerriLarri</p>
-    </div>
-  </header>
-
+  <app-header class="header"></app-header>
   <div class="content">
-    <div>
-      <h2>Catchy line here!</h2>
-      <p>Create an account to keep track of your language journey</p>
-      <a href="#">Join now</a>
-    </div>
+    <router-outlet />
   </div>
 </main>
-
-<router-outlet />

@@ -1,0 +1,6 @@
+<div>
+  <input type="text" [(ngModel)]="username" placeholder="username" />
+  <input type="password" [(ngModel)]="password" placeholder="password" />
+  <button (click)="onLogin()">Submit</button>
+  <div *ngIf="isLoading()">Loading...</div>
+</div>

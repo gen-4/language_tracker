@@ -1,0 +1,11 @@
+<header>
+  <a href="/"><h1>Language Tracker</h1></a>
+
+  <nav></nav>
+
+  <a href="/login" *ngIf="!user()">Login</a>
+
+  <div class="user-profile" *ngIf="user() as user">
+    <p class="user-profile-name">{{ user.username }}</p>
+  </div>
+</header>
