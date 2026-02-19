@@ -8,4 +8,40 @@
 
 a {
   text-decoration: none;
+  color: var(--text-white);
+}
+
+:root {
+  --purple: #8C13E0;
+  --dark-purple: #503861;
+  --dark-green: #4B6138;
+  --light-green: #72E012;
+  --dark-yellow: #615D38;
+  --yellow: #E0CE12;
+  --text-black: #160324;
+  --text-white: #DFE1FF;
+
+  --primary: var(--yellow);
+  --secondary: var(--dark-yellow);
+  --background: #1D1524;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-white);
+  margin: 0;
+}
+
+.title-font {
+  font-family: "Eagle Lake", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.content-font {
+  font-family: "IM Fell English", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
 }

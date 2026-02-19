@@ -5,4 +5,16 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 5rem;
+  background-color: var(--dark-purple);
+}
+
+header h1 {
+  color: var(--primary);
+}
+
+.login-button {
+  border-radius: 15px;
+  background-color: var(--primary);
+  padding: .5rem 1rem;
+  color: var(--text-black);
 }

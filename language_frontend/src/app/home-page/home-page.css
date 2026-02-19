@@ -1,0 +1,28 @@
+:host {
+  padding-top: 5rem;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+h2 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+p {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+a {
+  width: fit-content;
+  font-size: 2rem;
+  border-radius: 15px;
+  border: 2px solid var(--primary);
+  padding: 1rem 1.5rem;
+  color: var(--primary);
+}
