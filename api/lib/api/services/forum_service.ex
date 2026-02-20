@@ -12,7 +12,7 @@ defmodule Api.ForumService do
          |> Post.changeset(post)
          |> Repo.insert() do
       {:error, changeset} ->
-        Logger.warning("Validation error creating post: #{changeset}")
+        Logger.warning("Validation error creating post: #{inspect(changeset.errors)}")
         {:error, changeset}
 
       {:ok, post} ->

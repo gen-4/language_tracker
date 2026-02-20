@@ -9,7 +9,8 @@ defmodule Api.Auth.Guardian do
   end
 
   def resource_from_claims(%{"sub" => id}) do
-    case Repo.get_by(User, id: id) do
+    case Repo.get_by(User, id: id)
+         |> Repo.preload(:roles) do
       nil -> {:error, :unauthorized}
       user -> {:ok, user}
     end

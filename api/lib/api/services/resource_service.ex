@@ -13,7 +13,7 @@ defmodule Api.ResourceService do
          |> Resource.changeset(resource)
          |> Repo.insert() do
       {:error, changeset} ->
-        Logger.warning("Validation error creating resource: #{changeset}")
+        Logger.warning("Validation error creating resource: #{inspect(changeset.errors)}")
         {:error, changeset}
 
       {:ok, resource} ->
@@ -22,10 +22,20 @@ defmodule Api.ResourceService do
   end
 
   def delete_resource(id) do
-    case Repo.get(Resource, id)
-         |> Repo.delete() do
-      {:ok, _} -> :ok
-      {:error, _} -> :error
+    case Repo.get(Resource, id) do
+      nil ->
+        Logger.warning("Resource was not found to delete it: #{id}")
+        {:error, :not_found}
+
+      resource ->
+        case Repo.delete(resource) do
+          {:ok, resource} ->
+            {:ok, resource}
+
+          {:error, changeset} ->
+            Logger.error("Error removing resource[#{id}]: #{inspect(changeset.errors)}")
+            {:error, :validation_error}
+        end
     end
   end
 end

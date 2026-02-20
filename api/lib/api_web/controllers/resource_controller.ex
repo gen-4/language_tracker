@@ -26,15 +26,15 @@ defmodule ApiWeb.ResourceController do
 
   def delete_resource(conn, %{"id" => id}) do
     case ResourceService.delete_resource(id) do
-      :ok ->
+      {:ok, _} ->
         conn
         |> put_status(:ok)
         |> json(%{msg: "Resouce #{id} has been deleted"})
 
-      :error ->
+      {:error, error} ->
         conn
         |> put_status(:bad_request)
-        |> json(%{error: "Validation error"})
+        |> json(%{error: error})
     end
   end
 end

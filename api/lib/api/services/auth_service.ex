@@ -2,9 +2,12 @@ defmodule Api.AuthService do
   require Logger
   alias Api.Repo
   alias Api.User
+  alias Api.Role
 
   def login(username, password) do
-    user = Repo.get_by(User, username: username)
+    user =
+      Repo.get_by(User, username: username)
+      |> Repo.preload(:roles)
 
     cond do
       user && Bcrypt.verify_pass(password, user.hashed_password) ->
@@ -22,11 +25,19 @@ defmodule Api.AuthService do
   end
 
   def signup(user) do
+    role = Repo.get_by(Role, name: "User")
+
+    case role do
+      nil -> Logger.warning("Role User does not exist")
+      _ -> :ok
+    end
+
     case %User{}
          |> User.registration_changeset(user)
+         |> Ecto.Changeset.put_assoc(:roles, [role])
          |> Repo.insert() do
       {:error, changeset} ->
-        Logger.warning("Validation error creating post: #{changeset}")
+        Logger.warning("Validation error creating post: #{inspect(changeset.errors)}")
         {:error, changeset}
 
       {:ok, created_user} ->

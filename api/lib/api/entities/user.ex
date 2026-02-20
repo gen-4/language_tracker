@@ -21,6 +21,7 @@ defmodule Api.User do
     |> validate_required([:username])
     |> validate_length(:username, min: 3)
     |> validate_length(:password, min: 5)
+    |> unique_constraint(:username)
     |> put_assoc(:roles, attrs[:roles] || [])
     |> hash_password()
   end
@@ -32,6 +33,7 @@ defmodule Api.User do
     |> validate_required([:username, :password])
     |> validate_length(:username, min: 3)
     |> validate_length(:password, min: 5)
+    |> unique_constraint(:username)
     |> put_assoc(:roles, attrs[:roles] || [])
     |> hash_password()
   end
