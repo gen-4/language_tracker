@@ -1,9 +1,9 @@
 <header>
-  <a href="/"><h1 class="title-font">Language Tracker</h1></a>
+  <a [routerLink]="['/']"><h1 class="title-font">Language Tracker</h1></a>
 
   <nav></nav>
 
-  <a class="login-button" href="/login" *ngIf="!user()">Log in</a>
+  <a class="login-button" [routerLink]="['/login']" *ngIf="!user()">Log in</a>
 
   <div class="user-profile" *ngIf="user() as user">
     <p class="user-profile-name">{{ user.username }}</p>

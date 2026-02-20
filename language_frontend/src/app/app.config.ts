@@ -17,8 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       auth: authReducer
     }),
-    provideEffects({ loginEffect }),
-    provideEffects({ signupEffect }),
+    provideEffects({ loginEffect, signupEffect }),
     provideHttpClient(withInterceptors([authInterceptor]), withFetch())
   ]
 };
