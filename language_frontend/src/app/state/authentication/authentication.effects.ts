@@ -4,6 +4,7 @@ import { login, loginFailure, loginSuccess, signup, signupFailure, signupSuccess
 import { catchError, of, map, switchMap } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 export const loginEffect = createEffect(
   (
@@ -15,7 +16,7 @@ export const loginEffect = createEffect(
       switchMap(({ credentials }) =>
         authService.login(credentials).pipe(
           map(response => loginSuccess({ user: response.user })),
-          catchError(error => of(loginFailure({ error })))
+          catchError((error: HttpErrorResponse) => of(loginFailure({ error: error.error[Object.keys(error.error)[0]] })))
         )
       )
     );
@@ -37,7 +38,7 @@ export const signupEffect = createEffect(
             router.navigateByUrl("/login");
             return signupSuccess();
           }),
-          catchError(error => of(signupFailure({ error })))
+          catchError((error: HttpErrorResponse) => of(loginFailure({ error: error.error[Object.keys(error.error)[0]] })))
         )
       )
     );

@@ -14,4 +14,9 @@ export const selectIsLoading = createSelector(
   (state: AuthState) => state.status === 'loading'
 );
 
+export const selectError = createSelector(
+  selectUserStatus,
+  (state: AuthState) => state.error
+);
+
 // TODO: Add isUserUser or isUserAdmin

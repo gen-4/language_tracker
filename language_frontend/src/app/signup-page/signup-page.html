@@ -4,4 +4,5 @@
   <input type="password" placeholder="retype password" />
   <button (click)="onSignup()">Submit</button>
   <div *ngIf="isLoading()">Loading...</div>
+  <p class="error-msg" *ngIf="error() as error">Error: {{ error }}</p>
 </div>

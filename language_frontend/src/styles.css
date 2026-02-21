@@ -4,6 +4,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 a {
@@ -24,6 +25,10 @@ a {
   --primary: var(--yellow);
   --secondary: var(--dark-yellow);
   --background: #1D1524;
+
+  --info: var(--light-green);
+  --warning: #E6F522;
+  --error: #EB5E30;
 }
 
 body {
