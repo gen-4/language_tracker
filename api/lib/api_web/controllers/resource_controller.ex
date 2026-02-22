@@ -4,8 +4,13 @@ defmodule ApiWeb.ResourceController do
   alias Api.ResourceService
 
   def get_resources(conn, _params) do
-    resources = ResourceService.list_resources()
-    json(conn, resources)
+    user = Guardian.Plug.current_resource(conn)
+
+    resources = ResourceService.get_resources(user)
+
+    conn
+    |> put_status(:ok)
+    |> json(resources)
   end
 
   def create_resource(conn, resource_params) do
@@ -25,7 +30,9 @@ defmodule ApiWeb.ResourceController do
   end
 
   def delete_resource(conn, %{"id" => id}) do
-    case ResourceService.delete_resource(id) do
+    user = Guardian.Plug.current_resource(conn)
+
+    case ResourceService.delete_resource(user, id) do
       {:ok, _} ->
         conn
         |> put_status(:ok)

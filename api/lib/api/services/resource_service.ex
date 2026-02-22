@@ -3,10 +3,6 @@ defmodule Api.ResourceService do
   alias Api.Repo
   alias Api.Resource
 
-  def list_resources() do
-    Repo.all(Resource)
-  end
-
   def create_resource(user, resource) do
     case user
          |> Ecto.build_assoc(:resources)
@@ -21,8 +17,12 @@ defmodule Api.ResourceService do
     end
   end
 
-  def delete_resource(id) do
-    case Repo.get(Resource, id) do
+  def get_resources(user) do
+    Repo.all_by(Resource, user_id: user.id)
+  end
+
+  def delete_resource(user, id) do
+    case Repo.get_by(Resource, id: id, user: user) do
       nil ->
         Logger.warning("Resource was not found to delete it: #{id}")
         {:error, :not_found}
