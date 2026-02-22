@@ -14,6 +14,11 @@ export const selectIsLoading = createSelector(
   (state: AuthState) => state.status === 'loading'
 );
 
+export const selectIsLogged = createSelector(
+  selectUserStatus,
+  (state: AuthState) => state.status === 'logged'
+);
+
 export const selectError = createSelector(
   selectUserStatus,
   (state: AuthState) => state.error

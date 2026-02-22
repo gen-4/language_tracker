@@ -23,7 +23,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/assets/favicon.png",
+              "src/assets/any_lang_favicon2.svg",
+              "src/assets/any_lang_logo4.svg",
               "src/assets"
             ],
             "styles": [

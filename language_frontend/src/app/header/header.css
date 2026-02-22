@@ -18,3 +18,8 @@ header h1 {
   padding: .5rem 1rem;
   color: var(--text-black);
 }
+
+.logo-img {
+  transform: scale(4);
+  height: 80px;
+}

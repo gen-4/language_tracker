@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { login, loginFailure, loginSuccess, signup, signupFailure, signupSuccess } from "./authentication.actions";
+import { login, loginFailure, loginSuccess, signup, signupFailure, signupSuccess } from "src/app/state/authentication/authentication.actions";
 import { catchError, of, map, switchMap } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
@@ -38,7 +38,7 @@ export const signupEffect = createEffect(
             router.navigateByUrl("/login");
             return signupSuccess();
           }),
-          catchError((error: HttpErrorResponse) => of(loginFailure({ error: error.error[Object.keys(error.error)[0]] })))
+          catchError((error: HttpErrorResponse) => of(signupFailure({ error: error.error[Object.keys(error.error)[0]] })))
         )
       )
     );
