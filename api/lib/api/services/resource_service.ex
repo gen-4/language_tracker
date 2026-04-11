@@ -1,3 +1,5 @@
+import Ecto.Query
+
 defmodule Api.ResourceService do
   require Logger
   alias Api.Repo
@@ -17,8 +19,24 @@ defmodule Api.ResourceService do
     end
   end
 
-  def get_resources(user) do
-    Repo.all_by(Resource, user_id: user.id)
+  def get_resources(user, page, size) do
+    max_size = Application.get_env(:consts, :max_pagination_size)
+    default_size = Application.get_env(:consts, :default_pagination_size)
+
+    size =
+      case size do
+        nil -> default_size
+        s when s > max_size -> default_size
+        s -> s
+      end
+
+    offset = (page - 1) * size
+
+    Resource
+    |> where(user_id: ^user.id)
+    |> limit(^size)
+    |> offset(^offset)
+    |> Repo.all()
   end
 
   def delete_resource(user, id) do

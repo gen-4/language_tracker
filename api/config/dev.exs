@@ -62,6 +62,10 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+config :api,
+  max_pagination_size: 50,
+  default_pagination_size: 10
+
 config :api, Api.Auth.Guardian,
   issuer: "api",
   secret_key: "0iBmCg0@rceDoiHZA0A=0jdip2O6SCH0Jacmql@&mBSZlVBBF1wQ#EpDH^AIxh0b",

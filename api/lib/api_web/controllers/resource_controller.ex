@@ -3,10 +3,15 @@ defmodule ApiWeb.ResourceController do
 
   alias Api.ResourceService
 
-  def get_resources(conn, _params) do
+  def get_resources(conn, params) do
     user = Guardian.Plug.current_resource(conn)
 
-    resources = ResourceService.get_resources(user)
+    default_size = Application.get_env(:consts, :default_pagination_size)
+
+    {page, _} = params |> Map.get("page", "1") |> Integer.parse()
+    {size, _} = params |> Map.get("size", "#{default_size}") |> Integer.parse()
+
+    resources = ResourceService.get_resources(user, page, size)
 
     conn
     |> put_status(:ok)

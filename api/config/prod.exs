@@ -16,6 +16,10 @@ config :logger, level: :info
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
 
+config :api,
+  max_pagination_size: 50,
+  default_pagination_size: 10
+
 # Get secret key from env in production
 config :api, Api.Auth.Guardian,
   issuer: "api",
