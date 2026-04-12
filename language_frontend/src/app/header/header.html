@@ -3,9 +3,17 @@
 
   <nav></nav>
 
-  <a class="login-button" [routerLink]="['/login']" *ngIf="!user()">Log in</a>
+  @if (!user()) {
+    <a class="login-button" [routerLink]="['/login']">Log in</a>
+  } @else {
+    <div class="user-profile" (click)="toggleSubmenu()">
+      <p class="user-profile-name">{{ user()?.username }}</p>
 
-  <div class="user-profile" *ngIf="user() as user">
-    <p class="user-profile-name">{{ user.username }}</p>
-  </div>
+      @if (isSubmenuOpen() === true) {
+        <div class="submenu">
+          <div class="submenu-option" (click)="logout()">Logout</div>
+        </div>
+      }
+    </div>
+  }
 </header>

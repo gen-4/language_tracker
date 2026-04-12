@@ -4,10 +4,6 @@ defmodule ApiWeb.ForumController do
   alias Api.ForumService
 
   def get_posts(conn, _params) do
-    # This is how to get the user from the bearer
-    #  TODO: Remove when used somewhere else
-    # user = Guardian.Plug.current_resource(conn)
-
     posts = ForumService.list_posts()
     json(conn, posts)
   end

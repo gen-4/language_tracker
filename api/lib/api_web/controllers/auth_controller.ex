@@ -22,6 +22,10 @@ defmodule ApiWeb.AuthController do
     end
   end
 
+  def login_from_token(conn, _params) do
+    json(conn, Guardian.Plug.current_resource(conn))
+  end
+
   def signup(conn, user_params) do
     case AuthService.signup(user_params) do
       {:ok, user} ->

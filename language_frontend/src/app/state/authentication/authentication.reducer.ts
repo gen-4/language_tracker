@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/entities/user.model';
-import { login, loginFailure, loginSuccess, logout, signup, signupFailure, signupSuccess } from './authentication.actions';
+import { login, loginFailure, loginFromToken, loginFromTokenFailure, loginSuccess, logout, signup, signupFailure, signupSuccess } from './authentication.actions';
 
 export interface AuthState {
   user: User | null;
@@ -55,6 +55,18 @@ export const authReducer = createReducer(
   on(signupFailure, (state, { error }) => ({
     ...state,
     error,
+    status: 'unlogged'
+  })),
+
+  on(loginFromToken, (state) => ({
+    ...state,
+    error: null,
+    status: 'loading'
+  })),
+
+  on(loginFromTokenFailure, (state) => ({
+    ...state,
+    error: null,
     status: 'unlogged'
   }))
 );

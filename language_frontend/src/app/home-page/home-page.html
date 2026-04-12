@@ -63,10 +63,14 @@
 
   <div class="table-container">
     <table>
-      @for (resource of resources(); track resource.id) {
+      @for (resource of formattedResources(); track resource.id) {
       <tr>
         <td class="title">{{ resource.title }}</td>
-        <td class="type">{{ resource.type }}</td>
+        <td class="type">
+          @for (type of resource.type; track type) {
+              <div class="type-badge">{{ type }}</div>
+          }
+          </td>
         <td class="link">{{ resource.link }}</td>
         <td class="time">{{ resource.time }}</td>
         <td class="pages">{{ resource.pages }}</td>

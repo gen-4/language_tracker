@@ -124,7 +124,7 @@ td {
 }
 
 td.title {
-  width: 30%;
+  width: 15%;
 }
 
 td.link {
@@ -132,11 +132,14 @@ td.link {
 }
 
 td.type {
-  width: 10%;
+  width: 15%;
+  display: flex;
+  flex-direction: row;
+  gap: .2rem;
 }
 
 td.time {
-  width: 5%;
+  width: 15%;
 }
 
 td.pages {
@@ -145,4 +148,11 @@ td.pages {
 
 td.updated {
   width: 20%;
+}
+
+.type-badge {
+  border-radius: 1000000000px;
+  background-color: var(--primary);
+  padding: .1rem .6rem;
+  color: var(--text-black);
 }

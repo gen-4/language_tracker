@@ -24,3 +24,44 @@ header h1 {
   transform: scale(4);
   height: 80px;
 }
+
+.user-profile {
+  position: relative;
+  background-color: var(--purple);
+  border-radius: 20px;
+  padding: .8rem 1rem;
+}
+
+.user-profile:hover {
+  cursor: pointer;
+}
+
+.user-profile .user-profile-name {
+  margin: 0;
+}
+
+.submenu {
+  position: absolute;
+  top: 115%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: .5rem 0;
+  border-radius: 10px;
+  background-color: var(--dark-purple);
+}
+
+.submenu:hover {
+  cursor: auto;
+}
+
+.submenu-option {
+  width: 100%;
+  padding: .2rem .8rem;
+}
+
+.submenu .submenu-option:hover {
+  cursor: pointer;
+  background-color: var(--dark-yellow);
+}

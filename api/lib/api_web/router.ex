@@ -19,6 +19,7 @@ defmodule ApiWeb.Router do
   scope "/api", ApiWeb do
     pipe_through [:api, :api_auth]
 
+    post "/tokenlogin", AuthController, :login_from_token
     get "/posts", ForumController, :get_posts
     post "/post", ForumController, :create_post
     post "/resource", ResourceController, :create_resource

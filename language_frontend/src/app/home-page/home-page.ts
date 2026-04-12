@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
@@ -24,6 +24,13 @@ export class HomePage implements OnInit {
   isLoading = this.store.selectSignal(isLoading);
   error = this.store.selectSignal(selectError);
   typeStatus = signal({ text: false, video: false, audio: false })
+
+  formattedResources = computed(() => this.resources().map((resource) => ({
+    ...resource,
+    type: resource.type.split('&'),
+    time: formatTime(resource.time)
+  })));
+
   title = new FormControl('');
   link = new FormControl('');
   timeHours = new FormControl(0);
@@ -73,4 +80,19 @@ export class HomePage implements OnInit {
 
 }
 
+const formatTime = (totalMinutes?: number): string => {
+  if (!totalMinutes) {
+    return '';
+  }
+
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return [
+    hours ? `${hours} hours` : null,
+    minutes ? `${minutes} minutes` : null
+  ]
+    .filter(Boolean)
+    .join(' ');
+}
 

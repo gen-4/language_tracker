@@ -33,3 +33,11 @@ export const signupFailure = createAction(
   '[Signup Page] Signup User Error',
   props<{ error: string }>()
 );
+
+export const loginFromToken = createAction(
+  '[Home Page] Login from token'
+);
+
+export const loginFromTokenFailure = createAction(
+  '[Home Page] Login from token Failure'
+);
