@@ -12,7 +12,7 @@ defmodule Api.ResourceService do
          |> Repo.insert() do
       {:error, changeset} ->
         Logger.warning("Validation error creating resource: #{inspect(changeset.errors)}")
-        {:error, changeset}
+        {:error, changeset.errors}
 
       {:ok, resource} ->
         {:ok, resource}
@@ -32,11 +32,19 @@ defmodule Api.ResourceService do
 
     offset = (page - 1) * size
 
-    Resource
-    |> where(user_id: ^user.id)
-    |> limit(^size)
-    |> offset(^offset)
-    |> Repo.all()
+    resources =
+      Resource
+      |> where(user_id: ^user.id)
+      |> limit(^size)
+      |> offset(^offset)
+      |> Repo.all()
+
+    count =
+      Resource
+      |> where(user_id: ^user.id)
+      |> Repo.aggregate(:count, :id)
+
+    {resources, count}
   end
 
   def delete_resource(user, id) do

@@ -10,3 +10,10 @@ export interface Resource {
 }
 
 
+export interface ResourceRequest {
+  title: string,
+  type: string,
+  link?: string,
+  time?: number,
+  pages?: number,
+}

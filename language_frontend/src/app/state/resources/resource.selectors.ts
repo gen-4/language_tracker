@@ -9,6 +9,11 @@ export const selectMyResources = createSelector(
   (state: ResourceState) => state.myResources
 );
 
+export const selectMyResourcesCount = createSelector(
+  selectResources,
+  (state: ResourceState) => state.count
+);
+
 export const isLoading = createSelector(
   selectResources,
   (state: ResourceState) => state.status === 'loading'

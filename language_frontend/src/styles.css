@@ -24,7 +24,7 @@ a {
 
   --primary: var(--yellow);
   --secondary: var(--dark-yellow);
-  --background: #1D1524;
+  --background: #1B1B1B;
 
   --info: var(--light-green);
   --warning: #E6F522;
@@ -49,4 +49,21 @@ body {
   font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
+}
+
+input {
+  border-radius: 15px;
+  border: 0;
+  padding: .4rem .8rem;
+  background-color: var(--dark-yellow);
+}
+
+button {
+  width: fit-content;
+  border-radius: 15px;
+  background-color: var(--background);
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: .8rem 1.5rem;
+  font-size: 1rem;
 }

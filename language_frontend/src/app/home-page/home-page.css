@@ -1,5 +1,6 @@
 :host {
   padding-top: 5rem;
+  width: 100%;
 }
 
 div {
@@ -25,4 +26,123 @@ a {
   border: 2px solid var(--primary);
   padding: 1rem 1.5rem;
   color: var(--primary);
+}
+
+.content-container {
+  width: 100%;
+}
+
+.type-selectors {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.type-selector {
+  width: fit-content;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  background-color: var(--dark-purple);
+}
+
+.type-selector:hover {
+  cursor: pointer;
+}
+
+.type-selector.active {
+  background-color: var(--purple);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.title-input {
+  width: 35%;
+}
+
+.link-input {
+  width: 35%;
+}
+
+
+input.numeric {
+  width: 10%;
+}
+
+.action-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.loading-msg {
+  height: 1rem;
+}
+
+.add-button {
+  text-transform: uppercase;
+}
+
+.add-button:hover {
+  cursor: pointer;
+}
+
+.error-msg {
+  height: 1rem;
+  font-size: .85rem;
+  color: var(--error);
+}
+
+.table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+table {
+  width: 100%;
+  display: block;
+}
+
+tr {
+  width: 100%;
+  display: flex;
+}
+
+td {
+  padding: .2rem .5rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+td.title {
+  width: 30%;
+}
+
+td.link {
+  width: 30%;
+}
+
+td.type {
+  width: 10%;
+}
+
+td.time {
+  width: 5%;
+}
+
+td.pages {
+  width: 5%;
+}
+
+td.updated {
+  width: 20%;
 }

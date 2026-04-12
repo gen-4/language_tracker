@@ -9,13 +9,17 @@ import { HttpErrorResponse } from "@angular/common/http";
 export const loginEffect = createEffect(
   (
     actions$ = inject(Actions),
-    authService = inject(AuthService)
+    authService = inject(AuthService),
+    router = inject(Router)
   ) => {
     return actions$.pipe(
       ofType(login),
       switchMap(({ credentials }) =>
         authService.login(credentials).pipe(
-          map(response => loginSuccess({ user: response.user })),
+          map(response => {
+            router.navigateByUrl("/");
+            return loginSuccess({ user: response.user });
+          }),
           catchError((error: HttpErrorResponse) => of(loginFailure({ error: error.error[Object.keys(error.error)[0]] })))
         )
       )

@@ -5,7 +5,8 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 5rem;
-  background-color: var(--dark-purple);
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, transparent, var(--text-white), transparent) 10 10;
 }
 
 header h1 {

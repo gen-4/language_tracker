@@ -7,7 +7,7 @@ defmodule Api.Resource do
 
   schema "resource" do
     field :title, :string
-    field :type, Ecto.Enum, values: [:video, :text, :podcast]
+    field :type, :string
     field :link, :string
     field :time, :integer
     field :pages, :integer

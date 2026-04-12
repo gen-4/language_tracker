@@ -11,11 +11,11 @@ defmodule ApiWeb.ResourceController do
     {page, _} = params |> Map.get("page", "1") |> Integer.parse()
     {size, _} = params |> Map.get("size", "#{default_size}") |> Integer.parse()
 
-    resources = ResourceService.get_resources(user, page, size)
+    {resources, count} = ResourceService.get_resources(user, page, size)
 
     conn
     |> put_status(:ok)
-    |> json(resources)
+    |> json(%{resources: resources, count: count})
   end
 
   def create_resource(conn, resource_params) do

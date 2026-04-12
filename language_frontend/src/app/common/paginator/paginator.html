@@ -1,0 +1,5 @@
+<div class="pages-container">
+  @for (page of pages; track page) {
+  <div class="page" (click)="changePage(page)">{{ page }}</div>
+  }
+</div>

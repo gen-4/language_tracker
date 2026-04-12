@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Resource } from 'src/app/entities/resource.model';
+import { Resource, ResourceRequest } from 'src/app/entities/resource.model';
+import { PaginationParams } from "src/app/entities/common.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class ResourceService {
   private apiUrl = 'http://localhost:4000/api';
   constructor(private http: HttpClient) { };
 
-  getMyResources(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(`${this.apiUrl}/resources`);
+  getMyResources({ page = 1, size = 10 }: PaginationParams): Observable<{ resources: Resource[], count: number }> {
+    return this.http.get<{ resources: Resource[], count: number }>(`${this.apiUrl}/resources?page=${page}&size=${size ? size : 0}`);
+  };
+
+  createResource(req: ResourceRequest): Observable<Resource> {
+    return this.http.post<Resource>(`${this.apiUrl}/resource`, req);
   };
 }
