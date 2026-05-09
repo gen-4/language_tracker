@@ -76,3 +76,6 @@ baseline.json
 .vscode/
 
 todo*
+
+# TEST
+test_db.*
