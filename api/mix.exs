@@ -52,7 +52,8 @@ defmodule Api.MixProject do
       {:bandit, "~> 1.5"},
       {:guardian, "~> 2.0"},
       {:bcrypt_elixir, "~> 3.0"},
-      {:corsica, "~> 1.1.3"}
+      {:corsica, "~> 1.1.3"},
+      {:logger_file_backend, "~> 0.0.14"}
     ]
   end
 

@@ -39,4 +39,9 @@ defmodule ApiWeb.AuthController do
         |> json(%{error: "Validation error"})
     end
   end
+
+  def healthcheck(conn, _params) do
+    conn
+    |> put_status(:ok)
+  end
 end

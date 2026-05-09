@@ -39,7 +39,7 @@ if config_env() == :prod do
     password: System.get_env("LANGUAGES_DB_PASS"),
     hostname: System.get_env("LANGUAGES_DB_HOST"),
     database: System.get_env("LANGUAGES_DB_NAME"),
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "1"),
     # For machines with several cores, consider starting multiple pools of `pool_size`
     # pool_count: 4,
     socket_options: maybe_ipv6
@@ -72,6 +72,8 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0}
     ],
     secret_key_base: secret_key_base
+
+  config :logger, :file_log, path: System.get_env("LOGFILE_PATH", "language_api.log")
 
   config :api, Api.Auth.Guardian, secret_key: secret_key_base
 

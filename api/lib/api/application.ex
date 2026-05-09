@@ -7,10 +7,14 @@ defmodule Api.Application do
 
   @impl true
   def start(_type, _args) do
+    Logger.add_backend(LoggerFileBackend)
+
     children =
-      repo_children() ++
+      [
+        ApiWeb.Telemetry
+      ] ++
+        repo_children() ++
         [
-          ApiWeb.Telemetry,
           {DNSCluster, query: Application.get_env(:api, :dns_cluster_query) || :ignore},
           {Phoenix.PubSub, name: Api.PubSub},
           # Start a worker by calling: Api.Worker.start_link(arg)
@@ -26,7 +30,7 @@ defmodule Api.Application do
   end
 
   defp repo_children do
-    if Mix.env() == :test do
+    if Application.get_env(:api, :env) == :test do
       [Api.TestRepo]
     else
       [Api.Repo]

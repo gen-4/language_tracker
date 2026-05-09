@@ -14,6 +14,7 @@ defmodule ApiWeb.Router do
 
     post "/login", AuthController, :login
     post "/signup", AuthController, :signup
+    get "/healthcheck", AuthController, :healthcheck
   end
 
   scope "/api", ApiWeb do
