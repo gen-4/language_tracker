@@ -3,13 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 import { AuthRequest, LoginResponse, User } from 'src/app/entities/user.model';
 import { isPlatformBrowser } from "@angular/common";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // TODO: This will have to come from environ
-  private apiUrl = 'http://localhost:4000/api';
+  private apiUrl = environment.baseApiUrl;
   constructor(private http: HttpClient) { };
 
   private platformId = inject(PLATFORM_ID);
