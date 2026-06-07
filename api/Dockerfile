@@ -22,5 +22,6 @@ RUN apt update -y && apt install ca-certificates -y \
 WORKDIR /language_tracker
 
 COPY --from=builder /app/_build/prod/rel/api ./
+COPY --from=builder /app/entrypoint.sh ./
 
 ENTRYPOINT ["./entrypoint.sh"]
