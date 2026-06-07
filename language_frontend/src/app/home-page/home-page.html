@@ -1,0 +1,87 @@
+@if (!isLogged()) {
+<div>
+  <h2>Catchy line here!</h2>
+  <p>Create an account to keep track of your language journey</p>
+  <a [routerLink]="['/signup']">Join now</a>
+</div>
+} @else {
+
+<div class="content-container">
+  <div class="type-selectors">
+    <div class="type-selector" (click)="typeClick('text')"
+      [class.active]="typeStatus().text">
+      Text
+    </div>
+
+    <div class="type-selector" (click)="typeClick('video')"
+      [class.active]="typeStatus().video">
+      Video
+    </div>
+
+    <div class="type-selector" (click)="typeClick('audio')"
+      [class.active]="typeStatus().audio">
+      Audio
+    </div>
+  </div>
+
+  <div class="resource-input">
+    @if (typeStatus().video || typeStatus().audio || typeStatus().text) {
+      <div class="input-group">
+        <input class="title-input" type="text" [formControl]="title" placeholder="Title" />
+        <input class="link-input" type="text" [formControl]="link" placeholder="Link" />
+        @if (typeStatus().video || typeStatus().audio) {
+          <label>Hours</label>
+          <input class="numeric" type="number" min="0" [formControl]="timeHours" />
+          <label>Minutes</label>
+          <input class="numeric" type="number" min="0" max="60" [formControl]="timeMinutes" />
+        }
+        @if (typeStatus().text) {
+          <label>Pages</label>
+          <input class="numeric" type="number" min="0" [formControl]="pages" />
+        }
+      </div>
+
+      <div class="action-container">
+        <button class="add-button" (click)="addResource()">Add</button>
+
+             </div>
+      <p class="error-msg">
+      @if (error()) {
+        Error: {{ error() }}
+      }
+      </p>
+    }
+  </div>
+
+  <div class="action-container">
+    <div class="loading-msg">
+      @if (isLoading()) {
+        Loading...
+      }
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      @for (resource of formattedResources(); track resource.id) {
+      <tr>
+        <td class="title">{{ resource.title }}</td>
+        <td class="type">
+          @for (type of resource.type; track type) {
+              <div class="type-badge">{{ type }}</div>
+          }
+          </td>
+        <td class="link">{{ resource.link }}</td>
+        <td class="time">{{ resource.time }}</td>
+        <td class="pages">{{ resource.pages }}</td>
+        <td class="updated">{{ resource.updated_at | date:'medium' }}</td>
+      </tr>
+      } @empty {
+      <tr>No data to display</tr>
+      }
+    </table>
+
+    <app-paginator [count]="count()" (changePageEvent)="changePage($event)"></app-paginator>
+  </div>
+</div>
+}

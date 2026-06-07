@@ -5,8 +5,27 @@ defmodule ApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug ApiWeb.AuthPipeline
+  end
+
   scope "/api", ApiWeb do
     pipe_through :api
+
+    post "/login", AuthController, :login
+    post "/signup", AuthController, :signup
+    get "/healthcheck", AuthController, :healthcheck
+  end
+
+  scope "/api", ApiWeb do
+    pipe_through [:api, :api_auth]
+
+    post "/tokenlogin", AuthController, :login_from_token
+    get "/posts", ForumController, :get_posts
+    post "/post", ForumController, :create_post
+    post "/resource", ResourceController, :create_resource
+    get "/resources", ResourceController, :get_resources
+    delete "/resource/:id", ResourceController, :delete_resource
   end
 
   # Enable LiveDashboard in development

@@ -1,0 +1,19 @@
+<header>
+  <a [routerLink]="['/']"><img class="logo-img" src="assets/any_lang_logo4.svg" /></a>
+
+  <nav></nav>
+
+  @if (!user()) {
+    <a class="login-button" [routerLink]="['/login']">Log in</a>
+  } @else {
+    <div class="user-profile" (click)="toggleSubmenu()">
+      <p class="user-profile-name">{{ user()?.username }}</p>
+
+      @if (isSubmenuOpen() === true) {
+        <div class="submenu">
+          <div class="submenu-option" (click)="logout()">Logout</div>
+        </div>
+      }
+    </div>
+  }
+</header>
