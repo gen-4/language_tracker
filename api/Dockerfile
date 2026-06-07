@@ -1,12 +1,16 @@
-FROM debian:latest
+FROM elixir:1.17 AS builder
 
+WORKDIR /app
+COPY . .
+
+RUN mix deps.get
+RUN MIX_ENV=prod mix release
+
+
+FROM debian:latest
 
 RUN mkdir /language_tracker
 RUN mkdir /var/log/language_tracker
-
-WORKDIR /language_tracker
-COPY _build/prod/rel/api .
-COPY entrypoint.sh .
 
 RUN apt update -y && apt install ca-certificates -y \
     libncurses-dev \
@@ -14,5 +18,9 @@ RUN apt update -y && apt install ca-certificates -y \
     libstdc++6 \
     openssl \
     && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /language_tracker
+
+COPY --from=builder /app/_build/prod/rel/api ./
 
 ENTRYPOINT ["./entrypoint.sh"]
