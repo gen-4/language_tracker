@@ -49,4 +49,12 @@ defmodule ApiWeb.ResourceController do
         |> json(%{error: error})
     end
   end
+
+  def get_youtube_video(conn, %{"id" => id}) do
+    {title, duration} = ResourceService.get_youtube_video(id)
+
+    conn
+    |> put_status(:ok)
+    |> json(%{title: title, duration: duration})
+  end
 end

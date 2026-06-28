@@ -17,3 +17,8 @@ export interface ResourceRequest {
   time?: number,
   pages?: number,
 }
+
+export interface VideoInfo {
+  title: string,
+  duration: number
+}

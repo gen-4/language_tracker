@@ -8,7 +8,7 @@ import {
   createResourcesClearValidationError,
   createResource,
   createResourceSuccess,
-  createResourceFailure
+  createResourceFailure,
 } from 'src/app/state/resources/resource.actions';
 
 export interface ResourceState {
@@ -22,7 +22,7 @@ export const initialState: ResourceState = {
   myResources: [],
   count: 0,
   error: null,
-  status: 'loaded'
+  status: 'loaded',
 };
 
 export const resourceReducer = createReducer(
@@ -72,7 +72,7 @@ export const resourceReducer = createReducer(
     myResources: [resource, ...state.myResources],
     count: state.count + 1,
     error: null,
-    status: 'loaded'
+    status: 'loaded',
   })),
 
   on(createResourceFailure, (state, { error }) => ({

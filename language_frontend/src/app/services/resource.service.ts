@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Resource, ResourceRequest } from 'src/app/entities/resource.model';
+import { Resource, ResourceRequest, VideoInfo } from 'src/app/entities/resource.model';
 import { PaginationParams } from "src/app/entities/common.model";
 import { environment } from "src/environments/environment";
 
@@ -19,4 +19,9 @@ export class ResourceService {
   createResource(req: ResourceRequest): Observable<Resource> {
     return this.http.post<Resource>(`${this.apiUrl}/resource`, req);
   };
+
+  getVideoInfo(videoId: string): Observable<VideoInfo> {
+    return this.http.get<VideoInfo>(`${this.apiUrl}/video/${videoId}`);
+  };
+
 }
