@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       getMyResourcesEffect,
       createResourceEffect,
       loginSuccessLoadResourcesEffect,
-      logoutEffect
+      logoutEffect,
     }),
     provideHttpClient(withInterceptors([authInterceptor]), withFetch())
   ]

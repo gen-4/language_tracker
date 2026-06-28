@@ -64,4 +64,24 @@ defmodule Api.ResourceService do
         end
     end
   end
+
+  def get_youtube_video(id) do
+    html =
+      Req.get!("https://www.youtube.com/watch?v=#{id}")
+      |> Map.get(:body)
+
+    title =
+      case Regex.run(~r/<meta property="og:title" content="([^"]+)"/, html) do
+        [_, t] -> t
+        _ -> nil
+      end
+
+    duration =
+      case Regex.run(~r/"lengthSeconds":"(\d+)"/, html) do
+        [_, s] -> String.to_integer(s)
+        _ -> nil
+      end
+
+    {title, duration}
+  end
 end

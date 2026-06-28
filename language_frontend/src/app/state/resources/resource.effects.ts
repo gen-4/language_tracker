@@ -6,7 +6,7 @@ import {
   createResourceSuccess,
   getMyResources,
   getMyResourcesFailure,
-  getMyResourcesSuccess
+  getMyResourcesSuccess,
 } from "src/app/state/resources/resource.actions";
 import { catchError, of, map, switchMap } from "rxjs";
 import { ResourceService } from "src/app/services/resource.service";
@@ -47,4 +47,6 @@ export const createResourceEffect = createEffect(
   },
   { functional: true }
 );
+
+
 

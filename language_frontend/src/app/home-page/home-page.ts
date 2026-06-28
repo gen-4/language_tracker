@@ -7,6 +7,7 @@ import { selectIsLogged } from 'src/app/state/authentication/authentication.sele
 import { selectMyResources, selectMyResourcesCount, isLoading, selectError } from 'src/app/state/resources/resource.selectors';
 import { getMyResources, createResourcesValidationError, createResource } from 'src/app/state/resources/resource.actions';
 import { ResourceRequest } from 'src/app/entities/resource.model';
+import { ResourceService } from 'src/app/services/resource.service';
 
 import { Paginator } from 'src/app/common/paginator/paginator';
 
@@ -18,6 +19,7 @@ import { Paginator } from 'src/app/common/paginator/paginator';
 })
 export class HomePage implements OnInit {
   private store = inject(Store);
+  private resourceService = inject(ResourceService)
   isLogged = this.store.selectSignal(selectIsLogged);
   resources = this.store.selectSignal(selectMyResources)
   count = this.store.selectSignal(selectMyResourcesCount);
@@ -57,7 +59,7 @@ export class HomePage implements OnInit {
   addResource() {
     if (!this.title.value) {
       this.store.dispatch(createResourcesValidationError({ error: 'Title cannot be empty' }));
-      return
+      return;
     }
 
     const type = Object.entries(this.typeStatus())
@@ -76,6 +78,40 @@ export class HomePage implements OnInit {
     };
 
     this.store.dispatch(createResource({ request }))
+  }
+
+  onLinkChange() {
+    if (!this.typeStatus().video || !this.link.value || !this.link.value.includes("youtube")) {
+      return;
+    }
+
+    const videoId = new URL(this.link.value).searchParams.get('v');
+    if (!videoId) {
+      return;
+    }
+
+    this.resourceService.getVideoInfo(videoId).subscribe(info => {
+      if (!info) {
+        return;
+      }
+
+      if (!this.title.value && info.title) {
+        this.title.setValue(info.title);
+      }
+
+      if (info.duration != null) {
+        const hours = Math.floor(info.duration / 3600);
+        const minutes = Math.floor((info.duration % 3600) / 60);
+
+        if (!this.timeHours.value) {
+          this.timeHours.setValue(hours);
+        }
+
+        if (!this.timeMinutes.value) {
+          this.timeMinutes.setValue(minutes);
+        }
+      }
+    });
   }
 
 }

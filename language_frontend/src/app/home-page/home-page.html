@@ -28,7 +28,7 @@
     @if (typeStatus().video || typeStatus().audio || typeStatus().text) {
       <div class="input-group">
         <input class="title-input" type="text" [formControl]="title" placeholder="Title" />
-        <input class="link-input" type="text" [formControl]="link" placeholder="Link" />
+        <input class="link-input" (change)="onLinkChange()" type="text" [formControl]="link" placeholder="Link" />
         @if (typeStatus().video || typeStatus().audio) {
           <label>Hours</label>
           <input class="numeric" type="number" min="0" [formControl]="timeHours" />
