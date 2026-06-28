@@ -7,7 +7,7 @@ RUN npm install -g @angular/cli@21.1.4
 COPY . .
 
 RUN npm ci
-RUN ng build --configuration production
+RUN ng build --base-href=/language-tracker/ --configuration production
 
 
 FROM nginx:alpine
