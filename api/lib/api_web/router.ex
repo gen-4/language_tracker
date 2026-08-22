@@ -27,6 +27,7 @@ defmodule ApiWeb.Router do
     get "/resources", ResourceController, :get_resources
     delete "/resource/:id", ResourceController, :delete_resource
     get "/video/:id", ResourceController, :get_youtube_video
+    put "/user/language", ResourceController, :change_language
   end
 
   # Enable LiveDashboard in development

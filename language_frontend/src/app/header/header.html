@@ -6,14 +6,37 @@
   @if (!user()) {
     <a class="login-button" [routerLink]="['/login']">Log in</a>
   } @else {
-    <div class="user-profile" (click)="toggleSubmenu()">
-      <p class="user-profile-name">{{ user()?.username }}</p>
-
-      @if (isSubmenuOpen() === true) {
-        <div class="submenu">
-          <div class="submenu-option" (click)="logout()">Logout</div>
+    <div class="header-right">
+      <div class="language-selector" (click)="toggleLanguageSelector()">
+        <div class="language-indicator">
+          <span class="language-flag">{{ currentLanguage()?.flag ?? '🌐' }}</span>
         </div>
-      }
+
+        @if (isLanguageSelectorOpen()) {
+          <div class="submenu language-submenu">
+            @for (lang of languages; track lang.code) {
+              <div
+                class="submenu-option language-option"
+                [class.selected]="lang.code === language()"
+                (click)="selectLanguage(lang.code, $event)"
+              >
+                <span class="language-flag">{{ lang.flag }}</span>
+                <span>{{ lang.nativeName }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="user-profile" (click)="toggleSubmenu()">
+        <p class="user-profile-name">{{ user()?.username }}</p>
+
+        @if (isSubmenuOpen() === true) {
+          <div class="submenu">
+            <div class="submenu-option" (click)="logout()">Logout</div>
+          </div>
+        }
+      </div>
     </div>
   }
 </header>

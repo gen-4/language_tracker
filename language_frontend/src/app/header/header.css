@@ -65,3 +65,48 @@ header h1 {
   cursor: pointer;
   background-color: var(--dark-yellow);
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.language-selector {
+  position: relative;
+  background-color: var(--purple);
+  border-radius: 20px;
+  padding: .8rem 1rem;
+}
+
+.language-selector:hover {
+  cursor: pointer;
+}
+
+.language-indicator {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.language-flag {
+  font-size: 1.2rem;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.language-option.selected {
+  background-color: var(--purple);
+}
+
+.language-submenu {
+  left: auto;
+  right: 0;
+  width: 12rem;
+  max-height: 300px;
+  overflow-y: auto;
+}

@@ -9,6 +9,9 @@ import {
   createResource,
   createResourceSuccess,
   createResourceFailure,
+  changeLanguage,
+  changeLanguageSuccess,
+  changeLanguageFailure,
 } from 'src/app/state/resources/resource.actions';
 
 export interface ResourceState {
@@ -76,6 +79,24 @@ export const resourceReducer = createReducer(
   })),
 
   on(createResourceFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'loaded'
+  })),
+
+  on(changeLanguage, (state) => ({
+    ...state,
+    error: null,
+    status: 'loading'
+  })),
+
+  on(changeLanguageSuccess, (state) => ({
+    ...state,
+    error: null,
+    status: 'loaded',
+  })),
+
+  on(changeLanguageFailure, (state, { error }) => ({
     ...state,
     error,
     status: 'loaded'

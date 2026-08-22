@@ -1,6 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "src/app/state/app.state";
 import { ResourceState } from "src/app/state/resources/resource.reducer";
+import { AuthState } from "src/app/state/authentication/authentication.reducer";
 
 export const selectResources = (state: AppState) => state.resources;
 
@@ -22,4 +23,9 @@ export const isLoading = createSelector(
 export const selectError = createSelector(
   selectResources,
   (state: ResourceState) => state.error
+);
+
+export const selectLanguage = createSelector(
+  (state: AppState) => state.auth,
+  (state: AuthState) => state.user?.current_language
 );
