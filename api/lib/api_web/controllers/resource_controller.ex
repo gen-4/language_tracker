@@ -11,7 +11,9 @@ defmodule ApiWeb.ResourceController do
     {page, _} = params |> Map.get("page", "1") |> Integer.parse()
     {size, _} = params |> Map.get("size", "#{default_size}") |> Integer.parse()
 
-    {resources, count} = ResourceService.get_resources(user, page, size)
+    language = Map.get(params, "language", user.current_language)
+
+    {resources, count} = ResourceService.get_resources(user, page, size, language)
 
     conn
     |> put_status(:ok)
@@ -56,5 +58,21 @@ defmodule ApiWeb.ResourceController do
     conn
     |> put_status(:ok)
     |> json(%{title: title, duration: duration})
+  end
+
+  def change_language(conn, %{"language" => language}) do
+    user = Guardian.Plug.current_resource(conn)
+
+    case ResourceService.change_language(user, language) do
+      {:ok, _} ->
+        conn
+        |> put_status(:ok)
+        |> json(%{msg: "Users curent language changed to #{language}"})
+
+      {:error, error} ->
+        conn
+        |> put_status(:internal_server_error)
+        |> json(%{error: error})
+    end
   end
 end

@@ -2,12 +2,13 @@ defmodule Api.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:id, :username, :inserted_at, :updated_at]}
+  @derive {Jason.Encoder, only: [:id, :username, :inserted_at, :updated_at, :current_language]}
 
   schema "users" do
     field :username, :string
     field :hashed_password, :string
     field :password, :string, virtual: true
+    field :current_language, :string
     many_to_many :roles, Api.Role, join_through: "user_roles", on_replace: :raise
     has_many :resources, Api.Resource, on_replace: :raise
 
@@ -24,6 +25,13 @@ defmodule Api.User do
     |> unique_constraint(:username)
     |> put_assoc(:roles, attrs[:roles] || [])
     |> hash_password()
+  end
+
+  @doc false
+  def language_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:current_language])
+    |> validate_required([:current_language])
   end
 
   @doc false

@@ -6,7 +6,8 @@ export interface Resource {
   time: number,
   pages: number,
   inserted_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  language: string
 }
 
 
@@ -21,4 +22,8 @@ export interface ResourceRequest {
 export interface VideoInfo {
   title: string,
   duration: number
+}
+
+export interface LanguageRequest {
+  language: string
 }

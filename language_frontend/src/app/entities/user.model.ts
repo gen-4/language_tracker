@@ -2,7 +2,8 @@ export interface User {
   id: number,
   username: string,
   inserted_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  current_language: string
 }
 
 export interface AuthRequest {

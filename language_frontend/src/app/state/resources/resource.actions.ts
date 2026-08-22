@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Resource, ResourceRequest } from 'src/app/entities/resource.model';
+import { Resource, ResourceRequest, LanguageRequest } from 'src/app/entities/resource.model';
 import { PaginationParams } from "src/app/entities/common.model";
 
 export const getMyResources = createAction(
@@ -41,3 +41,17 @@ export const createResourceFailure = createAction(
   props<{ error: string }>()
 );
 
+export const changeLanguage = createAction(
+  '[Header] Change language',
+  props<{ request: LanguageRequest }>()
+);
+
+export const changeLanguageSuccess = createAction(
+  '[Header] Change language Success',
+  props<{ language: string }>()
+);
+
+export const changeLanguageFailure = createAction(
+  '[Header] Change language Failure',
+  props<{ error: string }>()
+);

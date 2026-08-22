@@ -11,6 +11,7 @@ defmodule Api.Resource do
     field :link, :string
     field :time, :integer
     field :pages, :integer
+    field :language, :string
     belongs_to :user, Api.User, on_replace: :delete
 
     timestamps(type: :utc_datetime)
@@ -19,6 +20,6 @@ defmodule Api.Resource do
   @doc false
   def changeset(resource, attrs) do
     resource
-    |> cast(attrs, [:title, :type, :link, :time, :pages])
+    |> cast(attrs, [:title, :type, :link, :time, :pages, :language])
   end
 end

@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/entities/user.model';
 import { login, loginFailure, loginFromToken, loginFromTokenFailure, loginSuccess, logout, signup, signupFailure, signupSuccess } from './authentication.actions';
+import { changeLanguageSuccess } from 'src/app/state/resources/resource.actions';
 
 export interface AuthState {
   user: User | null;
@@ -68,5 +69,10 @@ export const authReducer = createReducer(
     ...state,
     error: null,
     status: 'unlogged'
-  }))
+  })),
+
+  on(changeLanguageSuccess, (state, { language }) => ({
+    ...state,
+    user: state.user ? { ...state.user, current_language: language } : state.user,
+  })),
 );

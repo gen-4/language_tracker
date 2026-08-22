@@ -4,6 +4,7 @@ defmodule Api.ResourceService do
   require Logger
   alias Api.Repo
   alias Api.Resource
+  alias Api.User
 
   def create_resource(user, resource) do
     case user
@@ -19,7 +20,7 @@ defmodule Api.ResourceService do
     end
   end
 
-  def get_resources(user, page, size) do
+  def get_resources(user, page, size, language) do
     max_size = Application.get_env(:consts, :max_pagination_size)
     default_size = Application.get_env(:consts, :default_pagination_size)
 
@@ -35,6 +36,7 @@ defmodule Api.ResourceService do
     resources =
       Resource
       |> where(user_id: ^user.id)
+      |> where(language: ^language)
       |> limit(^size)
       |> offset(^offset)
       |> Repo.all()
@@ -42,6 +44,7 @@ defmodule Api.ResourceService do
     count =
       Resource
       |> where(user_id: ^user.id)
+      |> where(language: ^language)
       |> Repo.aggregate(:count, :id)
 
     {resources, count}
@@ -83,5 +86,21 @@ defmodule Api.ResourceService do
       end
 
     {title, duration}
+  end
+
+  def change_language(user, language) do
+    case user
+         |> User.language_changeset(%{current_language: language})
+         |> Repo.update() do
+      {:error, changeset} ->
+        Logger.warning(
+          "Validation error updating user current_language: #{inspect(changeset.errors)}"
+        )
+
+        {:error, changeset.errors}
+
+      {:ok, user} ->
+        {:ok, user}
+    end
   end
 end

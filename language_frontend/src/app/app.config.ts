@@ -10,7 +10,7 @@ import { authInterceptor } from 'src/app/services/auth.interceptor';
 import { authReducer } from 'src/app/state/authentication/authentication.reducer';
 import { loginEffect, signupEffect, loginFromTokenEffect, loginSuccessLoadResourcesEffect, logoutEffect } from 'src/app/state/authentication/authentication.effects';
 import { resourceReducer } from 'src/app/state/resources/resource.reducer';
-import { getMyResourcesEffect, createResourceEffect } from 'src/app/state/resources/resource.effects';
+import { getMyResourcesEffect, createResourceEffect, changeLanguageEffect, changeLanguageReloadResourcesEffect } from 'src/app/state/resources/resource.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +28,8 @@ export const appConfig: ApplicationConfig = {
       createResourceEffect,
       loginSuccessLoadResourcesEffect,
       logoutEffect,
+      changeLanguageEffect,
+      changeLanguageReloadResourcesEffect
     }),
     provideHttpClient(withInterceptors([authInterceptor]), withFetch())
   ]
